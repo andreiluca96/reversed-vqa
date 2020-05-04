@@ -1,0 +1,115 @@
+
+Introduction
+- the problem itself
+- stretch the fields of NLP and computer vision
+- Visual question answering is a significantly more complex problem than image captioning, as it frequently requires information not present in the image.
+
+
+
+Overview
+- combining convolutional and recurrent neural networks to map images and questions to a common feature space
+- Because a good VQA system must be able to solve many computer vision problems, it can be considered a component of a Turing Test for image understanding
+
+• Object recognition - What is in the image?
+• Object detection - Are there any cats in the image?
+• Attribute classification - What color is the cat?
+• Scene classification - Is it sunny?
+• Counting - How many cats are in the image?
+What is between the cat and the sofa?
+
+Related work:
+- image captioning
+- textual question answering
+
+
+Datasets:
+- size
+- amount of reasoning
+- how much info is need beyond that
+- https://arxiv.org/pdf/1610.01465.pdf Table 1
+
+Evaluation metrics:
+- multi-choice: simple accuracy, precision/recall
+- open-ended questions: dogs vs dog
+	- Wu-Palmer Similarity: semantic meaning 
+	- problems: black vs white
+	- cannot be used for multiple words
+	- multiple answers in the dataset
+	- at least 3 annotators had that answer
+	- manual evaluation
+
+
+Methods:
+- joint embedding approaches
+	- CNN and RNN 
+- attention mechanism 
+	- focus on image and question
+- compositional models?
+- knowledge base enhanced approaches
+
+
+Joint embedding:
+- project image and question into a common feature set and compute similarities 
+- arhitecture: CNN vs Word embeddings + LSTM
+- Figure 1 from https://arxiv.org/pdf/1607.05910.pdf
+- Add LSTM decoder or directly classify
+
+- pooling in the fourier space (“Multimodal Compact Bilinear pooling”)
+- multimodal residual learning framework (MRN) - learning joint representation
+
+
+Attention based models:
+- focus on parts of image based on question and vice-versa
+- LSTM add spatial attention
+- co-attention 
+
+
+Compositional models:
+
+- Neural Module Networks
+	- split the network to modules based on question structure: some arhitectures might resolve some questions, other not
+
+- Dynamic Memory Networks
+	- inspired from Textual question answering 
+	- use of episodic memory (GRU gates)
+
+Models using external knowledge bases:
+- extract concepts from image and then map to DBpedia (through LSTM for example)
+- provides reasoning that can be used for debugging
+
+
+
+Second Survey:
+
+Recent advancements in computer vision and deep learning research have enabled enormous
+progress in many computer vision tasks, such as image classification [1, 2], object detection [3, 4], and activity recognition [5, 6, 7]. Given enough data, deep convolutional neural
+networks (CNNs) rival the abilities of humans to do image classification [2]. With annotated
+datasets rapidly increasing in size thanks to crowd-sourcing, similar outcomes can be anticipated for other focused computer vision problems. However, these problems are narrow in
+scope and do not require holistic understanding of images. As humans, we can identify the
+objects in an image, understand the spatial positions of these objects, infer their attributes
+and relationships to each other, and also reason about the purpose of each object given the
+surrounding context. We can ask arbitrary questions about images and also communicate
+the information gleaned from them
+
+
+Methods:
+1) extracting image features (image featurization), 
+2) extracting question features (question featurization), and 
+3) an algorithm that combines these features to produce an answer
+
+Fig 8: https://arxiv.org/pdf/1610.01465.pdf
+
+Methods:
+- Bayesian and Question-Aware Models: extract based on question semantic segmentation for images and then use Bayesian classifier for prediction 
+- Attention Based Models: Figure 9: https://arxiv.org/pdf/1610.01465.pdf
+- SAN, DMN
+
+Remaining:  Bilinear Pooling Methods - outer product in a lower dimension
+
+
+Idea: 
+generate questions for VQA
+evaluation metric 
+
+Bias on question (repharsing it provides bad results)
+Hard to define evaluation  
